@@ -342,5 +342,24 @@ require('lazy').setup({
   },
 })
 
+-- Start with neo-tree open
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function()
+--     local neotree = require 'neo-tree.command'
+--     neotree.execute { action = 'show' }
+--   end,
+-- })
+--
+
+-- if directory, start with telescope
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+      local builtin = require 'telescope.builtin'
+      builtin.find_files()
+    end
+  end,
+})
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
