@@ -104,12 +104,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Copy link to remote
+-- Copy relative link
 vim.keymap.set('n', '<leader>l', function()
+  local relativePath = vim.fn.expand '%'
+
+  vim.fn.setreg('+', relativePath)
+end, { desc = '' })
+
+-- Copy link to remote
+vim.keymap.set('n', '<leader>L', function()
   local workingDir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
   local relativePath = vim.fn.expand '%'
 
-  local brazilPath = os.getenv 'REMOTE_LINK_PREFIX' .. workingDir .. os.getenv 'REMOTE_LINK_BRANCH_SEPARATOR' .. relativePath
+  local remotePath = os.getenv 'REMOTE_LINK_PREFIX' .. workingDir .. os.getenv 'REMOTE_LINK_BRANCH_SEPARATOR' .. relativePath
 
-  vim.fn.setreg('+', brazilPath)
+  vim.fn.setreg('+', remotePath)
 end, { desc = '' })
