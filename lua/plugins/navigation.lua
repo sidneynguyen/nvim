@@ -61,16 +61,17 @@ return {
             shortcut = 'h'
           end
 
-          local filename = vim.fn.fnamemodify(item.value, ':t')
-
-          table.insert(file_paths, '%#TabLineSel#' .. filename .. ':(' .. shortcut .. ')')
+          table.insert(file_paths, '%#TabLine# ' .. item.value .. ' %#TablineSel#[' .. shortcut .. '] ')
+          -- table.insert(file_paths, '%#TablineSel#[' .. shortcut .. ']' .. '%#TabLineFill# ' .. item.value)
         end
 
-        return table.concat(file_paths, '%#TabLineFill# | ') .. '%#TabLineFill#'
+        return table.concat(file_paths, '%#TabLineFill#  ') .. '%#TabLineFill#'
       end
 
       -- show Harpoon marks in tabline
       vim.o.tabline = '%!v:lua.harpoon_tabline()'
+      vim.cmd 'highlight TabLine guifg=#cdd6f4 guibg=#1e1e2e'
+      vim.cmd 'highlight TabLineSel guifg=#a6e3a1 guibg=#1e1e2e'
 
       vim.keymap.set('n', '<C-j>', function()
         harpoon:list():select(1)
