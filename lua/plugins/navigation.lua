@@ -61,11 +61,12 @@ return {
             shortcut = 'h'
           end
 
-          table.insert(file_paths, item.value .. ':(' .. shortcut .. ')')
+          local filename = vim.fn.fnamemodify(item.value, ':t')
+
+          table.insert(file_paths, '%#TabLineSel#' .. filename .. ':(' .. shortcut .. ')')
         end
 
-        -- Join the results with ' | ' separator
-        return table.concat(file_paths, ' | ')
+        return table.concat(file_paths, '%#TabLineFill# | ') .. '%#TabLineFill#'
       end
 
       -- show Harpoon marks in tabline
