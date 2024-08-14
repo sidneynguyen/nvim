@@ -29,24 +29,58 @@ return {
   },
   {
     'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
     config = function()
-      local mark = require 'harpoon.mark'
-      local ui = require 'harpoon.ui'
+      local harpoon = require 'harpoon'
 
-      vim.keymap.set('n', '<leader>ma', mark.add_file, { desc = 'mark' })
-      vim.keymap.set('n', '<leader>mm', ui.toggle_quick_menu, { desc = 'menu' })
+      harpoon:setup()
+
+      vim.keymap.set('n', '<C-m>', function()
+        harpoon:list():add()
+      end, { desc = 'mark' })
+
+      vim.keymap.set('n', '<leader>m', function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end, { desc = 'menu' })
+
+      -- custom tabline function to show Harpoon marks
+      function harpoon_tabline()
+        local file_paths = {}
+        local harpoon_files = harpoon:list()
+
+        for index, item in ipairs(harpoon_files.items) do
+          local shortcut = tostring(index)
+          if index == 1 then
+            shortcut = 'j'
+          elseif index == 2 then
+            shortcut = 'k'
+          elseif index == 3 then
+            shortcut = 'l'
+          elseif index == 4 then
+            shortcut = 'h'
+          end
+
+          table.insert(file_paths, item.value .. ':(' .. shortcut .. ')')
+        end
+
+        -- Join the results with ' | ' separator
+        return table.concat(file_paths, ' | ')
+      end
+
+      -- show Harpoon marks in tabline
+      vim.o.tabline = '%!v:lua.harpoon_tabline()'
 
       vim.keymap.set('n', '<C-j>', function()
-        ui.nav_file(1)
+        harpoon:list():select(1)
       end)
       vim.keymap.set('n', '<C-k>', function()
-        ui.nav_file(2)
+        harpoon:list():select(2)
       end)
       vim.keymap.set('n', '<C-l>', function()
-        ui.nav_file(3)
+        harpoon:list():select(3)
       end)
       vim.keymap.set('n', '<C-h>', function()
-        ui.nav_file(4)
+        harpoon:list():select(4)
       end)
     end,
   },
