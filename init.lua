@@ -266,14 +266,14 @@ require('lazy').setup({
 --
 
 -- if directory, start with telescope
-vim.api.nvim_create_autocmd('VimEnter', {
-  callback = function()
-    if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
-      local builtin = require 'telescope.builtin'
-      builtin.find_files()
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   callback = function()
+--     if vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+--       local builtin = require 'telescope.builtin'
+--       builtin.find_files()
+--     end
+--   end,
+-- })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

@@ -37,6 +37,7 @@ return {
 
       vim.keymap.set('n', '<C-m>', function()
         harpoon:list():add()
+        vim.o.tabline = vim.o.tabline
       end, { desc = 'mark' })
 
       vim.keymap.set('n', '<leader>m', function()
