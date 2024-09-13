@@ -50,18 +50,18 @@ return {
         local harpoon_files = harpoon:list()
 
         for index, item in ipairs(harpoon_files.items) do
-          local shortcut = tostring(index)
+          local shortcut = '<leader>m'
           if index == 1 then
-            shortcut = 'j'
+            shortcut = '<C-j>'
           elseif index == 2 then
-            shortcut = 'k'
+            shortcut = '<C-k>'
           elseif index == 3 then
-            shortcut = 'l'
+            shortcut = '<C-l>'
           elseif index == 4 then
-            shortcut = 'h'
+            shortcut = '<C-h>'
           end
 
-          table.insert(file_paths, '%#TabLine# ' .. item.value .. ' %#TablineSel#[' .. shortcut .. '] ')
+          table.insert(file_paths, '%#TabLine# ' .. item.value .. ' %#TablineSel#' .. shortcut .. ' ')
           -- table.insert(file_paths, '%#TablineSel#[' .. shortcut .. ']' .. '%#TabLineFill# ' .. item.value)
         end
 
