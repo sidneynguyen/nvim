@@ -167,6 +167,7 @@ return {
           },
         },
         jsonls = {},
+        smithy_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -230,6 +231,7 @@ return {
         'typescript',
         'rust',
         'go',
+        'smithy',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
