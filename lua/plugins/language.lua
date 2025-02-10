@@ -143,7 +143,8 @@ return {
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
-        tsserver = {
+        -- tsserver = {
+        ts_ls = {
           on_attach = function(client, bufnr)
             -- Disable the document formatting provider if you want to use a different formatter
             client.server_capabilities.documentFormattingProvider = false
