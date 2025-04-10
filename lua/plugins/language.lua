@@ -169,6 +169,7 @@ return {
         },
         jsonls = {},
         smithy_ls = {},
+        jdtls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -233,6 +234,7 @@ return {
         'rust',
         'go',
         'smithy',
+        'java',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
@@ -378,5 +380,8 @@ return {
         },
       }
     end,
+  },
+  {
+    'mfussenegger/nvim-jdtls',
   },
 }
