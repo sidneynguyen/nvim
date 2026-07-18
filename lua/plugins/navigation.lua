@@ -1,30 +1,15 @@
--- Neo-tree is a Neovim plugin to browse the file system
--- https://github.com/nvim-neo-tree/neo-tree.nvim
-
 return {
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
-    },
-    cmd = 'Neotree',
-    keys = {
-      { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal' },
-    },
+  { -- Edit the filesystem like a buffer
+    'stevearc/oil.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    lazy = false, -- required so `nvim <dir>` opens oil
     opts = {
-      filesystem = {
-        window = {
-          mappings = {
-            ['\\'] = 'close_window',
-          },
-        },
-        filtered_items = {
-          visible = true,
-        },
+      view_options = {
+        show_hidden = true,
       },
+    },
+    keys = {
+      { '\\', '<cmd>Oil<CR>', desc = 'Open parent directory' },
     },
   },
   {

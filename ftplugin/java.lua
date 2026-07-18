@@ -1,11 +1,10 @@
-local mason_registry = require 'mason-registry'
-local lombok_jar = mason_registry.get_package('jdtls'):get_install_path() .. '/lombok.jar'
+local mason = vim.fn.stdpath 'data' .. '/mason'
 
 local config = {
   cmd = {
-    '/Users/sidnguye/.local/share/nvim/mason/bin/jdtls',
-    string.format('--jvm-arg=-javaagent:%s', lombok_jar),
+    mason .. '/bin/jdtls',
+    '--jvm-arg=-javaagent:' .. mason .. '/packages/jdtls/lombok.jar',
   },
-  root_dir = vim.fs.dirname(vim.fs.find({ 'gradlew', '.git', 'mvnw' }, { upward = true })[1]),
+  root_dir = vim.fs.root(0, { 'gradlew', '.git', 'mvnw' }),
 }
 require('jdtls').start_or_attach(config)
