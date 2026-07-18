@@ -7,6 +7,10 @@ return {
       view_options = {
         show_hidden = true,
       },
+      keymaps = {
+        ['<C-p>'] = false, -- free ctrl+p for telescope find_files
+        ['K'] = 'actions.preview',
+      },
     },
     keys = {
       { '\\', '<cmd>Oil<CR>', desc = 'Open parent directory' },
