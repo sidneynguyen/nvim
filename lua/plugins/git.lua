@@ -1,6 +1,16 @@
 -- Git signs in the gutter and hunk actions
 return {
   {
+    'sindrets/diffview.nvim',
+    cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
+    keys = {
+      { '<leader>gv', '<cmd>DiffviewOpen<cr>', desc = 'git diff [v]iew (all changed files)' },
+      { '<leader>gh', '<cmd>DiffviewFileHistory %<cr>', desc = 'git file [h]istory' },
+      { '<leader>gq', '<cmd>DiffviewClose<cr>', desc = 'git diff view [q]uit' },
+    },
+    opts = {},
+  },
+  {
     'lewis6991/gitsigns.nvim',
     opts = {
       signs = {

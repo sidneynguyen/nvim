@@ -17,7 +17,7 @@ return {
       notify_on_error = false,
       format_on_save = function(bufnr)
         -- Skip lsp_fallback for languages without a standardized style
-        local disable_filetypes = { c = true, cpp = true, smithy = true }
+        local disable_filetypes = { c = true, cpp = true, smithy = true, java = true }
         return {
           timeout_ms = 500,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
