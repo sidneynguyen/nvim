@@ -1,18 +1,45 @@
 -- Git signs in the gutter and hunk actions
+local function jump_from_file_panel(key)
+  return function()
+    require('diffview.actions').focus_entry()
+    vim.schedule(function()
+      if vim.wo.diff then
+        vim.cmd.normal { key, bang = true }
+      end
+    end)
+  end
+end
+
 return {
   {
     'sindrets/diffview.nvim',
     cmd = { 'DiffviewOpen', 'DiffviewFileHistory' },
     keys = {
-      { '<leader>gv', '<cmd>DiffviewOpen<cr>', desc = 'git diff [v]iew (all changed files)' },
+      {
+        '<leader>gv',
+        function()
+          vim.cmd 'Neotree close'
+          vim.cmd 'DiffviewOpen HEAD'
+        end,
+        desc = 'git diff [v]iew (all changed files)',
+      },
       { '<leader>gh', '<cmd>DiffviewFileHistory %<cr>', desc = 'git file [h]istory' },
       { '<leader>gq', '<cmd>DiffviewClose<cr>', desc = 'git diff view [q]uit' },
     },
-    opts = {},
+    opts = {
+      enhanced_diff_hl = true,
+      keymaps = {
+        file_panel = {
+          { 'n', ']c', jump_from_file_panel ']c', { desc = 'Jump to next change' } },
+          { 'n', '[c', jump_from_file_panel '[c', { desc = 'Jump to previous change' } },
+        },
+      },
+    },
   },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
+      attach_to_untracked = true,
       signs = {
         add = { text = '+' },
         change = { text = '~' },
@@ -52,10 +79,11 @@ return {
           gitsigns.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
         end, { desc = 'reset git hunk' })
         -- normal mode
+        map('n', '<leader>gs', gitsigns.stage_hunk, { desc = 'git [s]tage hunk' })
         map('n', '<leader>gr', gitsigns.reset_hunk, { desc = 'git [r]eset hunk' })
         map('n', '<leader>gu', gitsigns.undo_stage_hunk, { desc = 'git [u]ndo stage hunk' })
         map('n', '<leader>gR', gitsigns.reset_buffer, { desc = 'git [R]eset buffer' })
-        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = 'git [p]review hunk' })
+        map('n', '<leader>gp', gitsigns.preview_hunk_inline, { desc = 'git [p]review hunk inline' })
         map('n', '<leader>gb', gitsigns.blame_line, { desc = 'git [b]lame line' })
         map('n', '<leader>gd', gitsigns.diffthis, { desc = 'git [d]iff against index' })
         map('n', '<leader>gD', function()
@@ -64,6 +92,7 @@ return {
         -- Toggles
         map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
         map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+        map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = '[T]oggle git [w]ord diff' })
       end,
     },
   },

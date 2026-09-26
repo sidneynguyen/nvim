@@ -1,19 +1,22 @@
 return {
-  { -- Edit the filesystem like a buffer
-    'stevearc/oil.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    lazy = false, -- required so `nvim <dir>` opens oil
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    lazy = false,
     opts = {
-      view_options = {
-        show_hidden = true,
-      },
-      keymaps = {
-        ['<C-p>'] = false, -- free ctrl+p for telescope find_files
-        ['K'] = 'actions.preview',
+      filesystem = {
+        filtered_items = {
+          visible = true,
+        },
       },
     },
     keys = {
-      { '\\', '<cmd>Oil<CR>', desc = 'Open parent directory' },
+      { '\\', '<cmd>Neotree toggle<CR>', desc = 'Toggle file explorer' },
     },
   },
   {

@@ -25,6 +25,7 @@ vim.opt.updatetime = 250
 vim.opt.timeoutlen = 300
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.diffopt:append 'algorithm:histogram'
 
 -- Display certain whitespace characters
 vim.opt.list = true
@@ -39,7 +40,7 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
--- Disable netrw (oil.nvim handles directories)
+-- Disable netrw (Neo-tree handles directories)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
