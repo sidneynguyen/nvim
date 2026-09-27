@@ -85,12 +85,11 @@ return {
       })
 
       -- NOTE: jdtls is intentionally not enabled here; ftplugin/java.lua starts it via nvim-jdtls
-      vim.lsp.enable { 'gopls', 'pyright', 'rust_analyzer', 'ts_ls', 'eslint', 'lua_ls', 'jsonls', 'smithy_ls' }
+      vim.lsp.enable { 'pyright', 'rust_analyzer', 'ts_ls', 'eslint', 'lua_ls', 'jsonls', 'smithy_ls' }
 
       -- Mason package names, not lspconfig names
       require('mason-tool-installer').setup {
         ensure_installed = {
-          'gopls',
           'pyright',
           'rust-analyzer',
           'typescript-language-server',
