@@ -19,7 +19,7 @@ return {
         '<leader>gv',
         function()
           vim.cmd 'Neotree close'
-          vim.cmd 'DiffviewOpen HEAD'
+          vim.cmd 'DiffviewOpen'
         end,
         desc = 'git diff [v]iew (all changed files)',
       },
